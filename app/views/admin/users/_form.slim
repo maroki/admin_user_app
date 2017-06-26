@@ -1,0 +1,10 @@
+= simple_form_for @user, url: @user.persisted? ? admin_user_path : admin_users_path, method: @user.persisted? ? :patch : :post do |f|
+  = f.input :full_name
+  = f.input :email
+  = f.input :password
+  = f.input :password_confirmation
+  = f.input :bio
+  = f.input :birth_date
+  = f.input :avatar
+
+  = f.submit 'Save', class: 'btn btn-default'

@@ -1,0 +1,35 @@
+h2 View user
+table.table.table-striped
+  thead
+    tr
+      th Key
+      th Value
+  tbody
+    tr
+      th scope="row" ID
+      td = @user.id
+    tr
+      th scope="row" Full Name
+      td = @user.full_name
+    tr
+      th scope="row" Email
+      td = @user.email
+    tr
+      th scope="row" Admin
+      td = @user.admin
+    tr
+      th scope="row" Bio
+      td = @user.bio || '-'
+    tr
+      th scope="row" Birth Date
+      td = @user.birth_date || '-'
+
+    tr
+      th scope="row" Avatar
+      td
+        - if @user.avatar.present?
+          = image_tag(@user.avatar.url(:medium), class: 'img-responsive', alt: @user.full_name)
+        - else
+          = 'none'
+
+= link_to 'Send mail user info', mail_info_admin_user_path(@user), class: 'btn btn-default'

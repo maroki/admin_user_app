@@ -1,0 +1,35 @@
+h1 User List
+= link_to 'New User', new_admin_user_path, class: 'btn btn-success pull-right'
+br
+div
+  - if @users.present?
+    table.table.table-striped
+      thead
+        tr
+          th #
+          th Full Name
+          th Email
+          th Admin
+          th Bio
+          th Birth Date
+          th Actions
+
+      tbody
+        - @users.each do |user|
+          tr
+            th scope="row" = user.id
+            td = user.full_name
+            td = user.email
+            td = user.admin
+            td = user.bio.try(:truncate, 30) || '-'
+            td = user.birth_date.try(:strftime, '%d/%m/%Y') || '-'
+            td
+              span = link_to 'View', admin_user_path(user)
+              '
+              span = link_to 'Edit', edit_admin_user_path(user)
+              '
+              span = link_to 'Delete', admin_user_path(user), method: :delete, data: { confirm: 'Are you sure?' }
+    .text-center
+      = paginate @users
+  - else
+    p No created users
